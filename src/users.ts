@@ -1,4 +1,7 @@
-   function generateRandomId():string {
+// Инкапсуляция и сокрытие 
+
+
+function generateRandomId(): string {
         return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
 }
     
@@ -52,6 +55,9 @@ class DataBase {
     public createNewTable(table:any) {
         this._table.push(table)
     }
+    public clearTable(table: any) {
+        this._table = [];
+    }
     get url() {
         return this._url;
     }
@@ -69,3 +75,13 @@ class DataBase {
     }
     
 }
+
+const db = new DataBase('1', 2, 'Serhi', 'asd3')
+// db.table = []; - нет доступа на прямую
+db.createNewTable({name: 'roles'}) // через метод есть доступ к изменениям
+db.createNewTable({ name: 'cliff' }) 
+db.clearTable({}) // внутри класса создали метод  для удаления таблиц
+console.log(db);
+
+//можно изменять только внутри класса, нет доступа из вне на прямую. В этом суть инкапсуляции
+
