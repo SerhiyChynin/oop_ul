@@ -7,6 +7,9 @@ class Person{
         this._lastName = lastname;
         this._age = age;
     }
+    public get fullName() {
+        return `firstname: ${this._firstName} lastname: ${this._lastName}`
+    }
     get firstName() {
         return this._firstName;
     }
@@ -46,3 +49,24 @@ class Employee extends Person {
 
 const employee1 = new Employee('Alex', 'Bowski', 22, 2223344, 100, 'kjhl12');
 console.log(employee1);
+
+class Developer extends Employee{
+    private _level;
+    private _languege;
+
+    constructor(firstName: string, lastName: string, age: number, inn: number, number: number, snils: any, level: string, languege: string) {
+        super(firstName, lastName, age, inn, number, snils)
+        this._level = level;
+        this._languege = languege;
+    }
+    set level(value: string) {
+        this._level = value;
+    }
+}
+
+const developer1 = new Developer('Alex', 'Bowski', 22, 2223344, 100, 'kjhl12', 'junior', 'js')
+developer1.age = 35
+developer1.level = 'middle';
+console.log(developer1.fullName);
+
+
