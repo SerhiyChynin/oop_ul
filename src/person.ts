@@ -7,6 +7,14 @@ class Person{
         this._lastName = lastname;
         this._age = age;
     }
+
+// ************** Полиморфизм *****************
+    
+    public greeting() {
+        console.log(`Hello i'm a person my name is ${this._firstName} ${this._lastName}`);
+    }
+
+
     public get fullName() {
         return `firstname: ${this._firstName} lastname: ${this._lastName}`
     }
@@ -45,10 +53,11 @@ class Employee extends Person {
         this._number = number;
         this._snils = snils;
     }
+    greeting() {
+        console.log(`Hello i'm a employee my name is ${this.firstName} ${this.lastName}`);
+    }
 }
 
-const employee1 = new Employee('Alex', 'Bowski', 22, 2223344, 100, 'kjhl12');
-console.log(employee1);
 
 class Developer extends Employee{
     private _level;
@@ -62,11 +71,34 @@ class Developer extends Employee{
     set level(value: string) {
         this._level = value;
     }
+     greeting() {
+        console.log(`Hello i'm a developer my name is ${this.firstName} ${this.lastName}`);
+    }
 }
 
 const developer1 = new Developer('Alex', 'Bowski', 22, 2223344, 100, 'kjhl12', 'junior', 'js')
 developer1.age = 35
 developer1.level = 'middle';
 console.log(developer1.fullName);
+console.log('=======================================');
+
+const employee1 = new Employee('Employee', 'Roksy', 22, 2223344, 100, 'kjhl12');
+const person = new Person('Person', 'Track', 22)
+
+//Полиморфизм - так как через наследование доступны методы родителя у каждого обьекта будет доступен метод приветствия
+
+// developer1.greeting();
+// employee1.greeting();
+// person.greeting();
+
+const personList: Person[] = [person, employee1, developer1];
+
+function massGreeting(persons: Person[]) {
+    for (let i = 0; i < persons.length; i++){
+        const person = persons[i];
+        person.greeting()
+    }
+}
+massGreeting(personList);
 
 
