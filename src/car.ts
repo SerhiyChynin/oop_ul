@@ -13,13 +13,31 @@ class Wheel{
     }
 }
 
+class Freshener{
+    drive() {
+        console.log('Fresh');
+        
+    }
+}
+
+class Flat{
+    freshener: Freshener;
+    constructor(freshener:any) {
+        this.freshener = freshener;
+    }
+}
+
 class Car{
     engine: Engine;
-    wheels: Wheel[] = [];
-    constructor() {
-        // this.wheels = [];
+    wheels: Wheel[];
+    freshener: Freshener;
+
+    constructor(freshener:any) {
+        //агрегация
+        this.freshener = freshener;
         //композиция
         this.engine = new Engine();
+        this.wheels = [];
         this.wheels.push(new Wheel());
         this.wheels.push(new Wheel());
         this.wheels.push(new Wheel());
@@ -35,7 +53,7 @@ class Car{
     }
 }
 
-const bmw = new Car();
+const bmw = new Car('fresh');
 bmw.drive();
 
 
