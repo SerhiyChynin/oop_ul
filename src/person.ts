@@ -102,3 +102,5 @@ function massGreeting(persons: Person[]) {
 massGreeting(personList);
 
 
+
+
