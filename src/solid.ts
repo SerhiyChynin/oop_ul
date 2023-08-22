@@ -50,6 +50,21 @@ class HttpClient{
     delete(){}
 }
 
+class UserService{
+    client: HttpClient;
+    constructor(client:any) {
+        this.client = client;
+    }
+    getOneUser(id: number){}
+    getAllUsers(){}
+}
+
+class RequisitesService{
+    createRequisites() { }
+    getRequisites() { }
+    UpdateRequisites() { }
+    
+}
 class DataFetcher{
     client: HttpClient;
     constructor(client:any) {
