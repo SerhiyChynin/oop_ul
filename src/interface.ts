@@ -1,5 +1,5 @@
 
-class User{
+export class User{
     username: string;
     age: number;
 }
