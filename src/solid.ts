@@ -16,16 +16,58 @@ class User {
 }
 
 class SaveToDB {
+    send(user: User) {
         //save user in DB
+    }
 }
     
-class Log {
+class Log{
+    user: User;
+    constructor(user:any) {
+        this.user = user; 
+
+    }
     log(user: User){
-        console.log(this);
+        console.log(user);
+        return user;
         }
     }
-class Send{
+class UserController{
     send(user: User){
         return http.send()
         }
+}
+    
+const user = new User('alah', 'agaaga')
+const log = new Log(user);
+console.log(log.log(user));
+
+
+class HttpClient{
+    get(url: string){}
+    post(){}
+    put(){}
+    delete(){}
+}
+
+class DataFetcher{
+    client: HttpClient;
+    constructor(client:any) {
+        this.client = client;
     }
+
+    getUser(id: number) {
+        this.client.get('http://localhost:5000' + id);
+    }
+
+    getRequisite(id: number) {
+        this.client.get('http://localhost:5000/requisite' + id);
+    }
+
+    getClients() {
+        this.client.get('http://localhost:5000/clients');
+    }
+    
+}
+
+    
