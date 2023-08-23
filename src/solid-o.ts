@@ -61,3 +61,88 @@ const knife = new Knife(70, 1);
 char.changeWeapon(knife);
 char.attack();
 
+
+
+//=========================================================================
+
+class Person{
+    fullName: string;
+    constructor(fullName: string) {
+        this.fullName = fullName;
+    }
+}
+
+
+class PersonList{
+    persons: Person[]
+    constructor(persons: Person[]) {
+        this.persons = persons;
+    }
+    sort() { 
+        ClientSort.sort(this.persons);
+    }
+}
+
+class Sort{
+    public static sort(array: any[]): any[]{
+        return [];
+    }
+}
+
+class ClientSort extends Sort{
+  public static sort(array: any[]): any[]{
+    
+        if (array.length < 10) {
+            return BubbleSort.sort(array);
+        } else if (array.length < 1000) {
+            return MergeSort.sort(array);
+        } else {
+            return QuickSort.sort(array);
+        }
+    };
+}
+
+class BubbleSort extends Sort{
+    public static sort(array: any[]): any[]{
+        return array;
+    };
+}
+class QuickSort extends Sort{
+    public static sort(array: any[]): any[]{
+        return array;
+    };
+}
+class MergeSort extends Sort{
+    public static sort(array: any[]): any[]{
+        return array;
+    };
+}
+
+
+
+
+class Music{
+
+}
+class MusicSort extends Sort{
+  public static sort(array: any[]): any[]{
+    
+        if (array.length < 10) {
+            return BubbleSort.sort(array);
+        } else if (array.length < 1000) {
+            return MergeSort.sort(array);
+        } else {
+            return QuickSort.sort(array);
+        }
+    };
+}
+
+class MusicList{
+    musics: Music[];
+    constructor(musics: Music[]) {
+        this.musics = musics;
+    }
+    sort() {
+        ClientSort.sort(this.musics)
+    }
+}
