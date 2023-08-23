@@ -1,21 +1,34 @@
 import { log } from "console";
 
-class Weapon{
-    type: string;
+interface Attacker{
+    attack: () => void;
+}
+
+class Weapon implements Attacker{
     damage: number; // 0 - 100
     range: number; // 0 - 100
-    constructor(type: string, damage: number, range: number) {
-        this.type = type;
+    constructor(damage: number, range: number) {
         this.damage = damage;
         this.range = range;
     }
     attack() {
-        if(this.type == 'sword'){
-        console.log('sword attack damage - ' + this.damage);
-        }
-        if(this.type == 'arch'){
-        console.log('arch shot damage - ' + this.damage);
-        }
+        
+    }
+}
+class Sword extends Weapon{
+    attack(){
+    console.log('sword hit damage - ' + this.damage);
+    }
+}
+class Arch extends Weapon{
+    attack(){
+    console.log('arch shot damage - ' + this.damage);
+    }
+}
+
+class Knife extends Weapon{
+    attack() {
+        console.log('knife backblow damage - ' + this.damage);
         
     }
 }
@@ -35,10 +48,16 @@ class Character{
     }
 }
 
-const sword = new Weapon('sword', 80, 10);
+const sword = new Sword(80, 10);
 const char = new Character('Ahiles', sword);
-console.log(char.attack());
+char.attack()
 
-const arch = new Weapon('arch', 50, 100);
+const arch = new Arch(50, 100);
 char.changeWeapon(arch);
-console.log(char.attack());
+char.attack()
+console.log(char);
+
+const knife = new Knife(70, 1);
+char.changeWeapon(knife);
+char.attack();
+
