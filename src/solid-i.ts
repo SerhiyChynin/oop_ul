@@ -53,9 +53,50 @@ const server = (req:any, res:any) => {
     const htmlPage = renderHtmlPage(store, req.url);
 }
 
-const createDependencyContainer = (router: Router, store:any) => {
+const createDependencyContainer = (router: Router, store:any, httpRequest: HttpRequest) => {
     return {
         getRouter: () => router,
         getStore: () => store,
+        getRequest: () => httpRequest,
+        
     }
 }
+
+
+interface HttpRequest{
+    get: () => void;
+    post: () => void;
+    put: () => void;
+    delete: () => void;
+}
+
+//Axios || http module
+class ServerHttp implements HttpRequest{
+    get: () => void;
+    post: () => void;
+    put: () => void;
+    delete: () => void;
+    // addToken(): void{
+    // throw new Error('not implement');
+    // }   
+    
+}
+
+//Fetch
+class ClientHttp implements HttpRequest, TokenStorage{
+    get(): void{};
+    post(): void{};
+    put(): void{};
+    delete():  void{};
+    addToken(): void {
+        return localStorage.get('token');
+    }
+    getToken: () => void;
+}
+
+interface TokenStorage{
+    addToken: () => void;
+    getToken: () => void;
+}
+
+//Избавляем сущности от методов которые они не используют, более предсказуемая работа, код менее связный
