@@ -4,31 +4,58 @@ enum Route {
     ABOUT = 'about_page',
     HOME = 'about_home',
 }
-interface IRouter{
+
+interface Router{
     parseUrl: (url:any) => void;
+    addQueryParams: (params: Record<string, string>) => void;
+
+}
+interface IClientRouter{
     navigate: (route: Route) => void;
     attachEventListener: () => void;
-    addQueryParams: (params: Record<string, string>) => void;
 }
 
-class Router implements IRouter{
-    parseUrl(url:any): void{};
-    navigate(route: Route): void{};
-    attachEventListener(): void{};   
-    addQueryParams(params: Record<string, string>): void{};
 
+interface IServerRouter extends Router{
+    prepareUrlForClient: (url: string) => void;  
 } 
 
+class ServerRouter implements IServerRouter{
+    parseUrl(url:any): void{};
+    addQueryParams(params: Record<string, string>): void{};
+    prepareUrlForClient(url: string): void{};  
+}
+
+class ClientRouter implements IClientRouter{
+    parseUrl(url:any): void{};
+    addQueryParams(params: Record<string, string>): void{};
+    prepareUrlForClient(url: string): void{};  
+    navigate(route: Route):  void{};
+    attachEventListener(): void{};
+
+}
+
 const renderHtmlPage = (store: any, url: any){
-    const router = new Router();
+    const router = new ServerRouter();
+
 }
 
 const client = () => {
     const store = createStore(initialData);
-    const router = new Router();
+    const router = new ClientRouter();
+    const di = createDependencyContainer(router, store)
 
 }
 const server = (req:any, res:any) => {
     const store = createStore(initialData);
+    const router = new ServerRouter();
+    const di = createDependencyContainer(router, store)
     const htmlPage = renderHtmlPage(store, req.url);
+}
+
+const createDependencyContainer = (router: Router, store:any) => {
+    return {
+        getRouter: () => router,
+        getStore: () => store,
+    }
 }
